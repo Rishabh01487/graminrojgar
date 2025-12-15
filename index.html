@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GraminRozgar - Village Employment Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== ROOT VARIABLES ===== */
+        :root {
+            --primary: #2E8B57;
+            --primary-dark: #1E6B47;
+            --primary-light: #3CB371;
+            --secondary: #FFD700;
+            --secondary-dark: #E6C300;
+            --accent: #FF6B35;
+            --accent-dark: #E05A2B;
+            --light: #F8F9FA;
+            --dark: #212529;
+            --gray: #6C757D;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 20px 50px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+
+        /* ===== RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1545335476-8bc2a8ec8e2a?auto=format&fit=crop&w=1600');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== USER ROLES SECTION ===== */
+        .roles-section {
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .roles-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .role-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .role-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .role-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .role-card h3 {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .feature-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list i {
+            color: var(--primary);
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features-section {
+            background: #f8f9fa;
+        }
+
+        .features-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 15px 30px;
+            background: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tab-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .feature-item h4 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* ===== PLATFORM ARCHITECTURE ===== */
+        .architecture-section {
+            background: white;
+        }
+
+        .architecture-diagram {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .layer {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .layer-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .components {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .component {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* ===== SKILL CATEGORIES ===== */
+        .skills-section {
+            background: #f8f9fa;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .category-header i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* ===== ROADMAP SECTION ===== */
+        .roadmap-section {
+            background: white;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            margin-bottom: 50px;
+            position: relative;
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .phase-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--primary);
+        }
+
+        .phase-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .phase-title i {
+            color: var(--secondary);
+        }
+
+        /* ===== DASHBOARD PREVIEW ===== */
+        .dashboard-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .dashboard-preview {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        /* ===== TECHNOLOGY STACK ===== */
+        .tech-section {
+            background: white;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .tech-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .tech-item:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .tech-item i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+
+        /* ===== MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 992px) {
+            .roles-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 60px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-village"></i>
+            <span>GraminRozgar</span>
+        </div>
+        
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#vision">Vision</a>
+            <a href="#roles">User Roles</a>
+            <a href="#features">Features</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#skills">Skills</a>
+            <a href="#roadmap">Roadmap</a>
+        </div>
+        
+        <div class="nav-buttons">
+            <button class="btn btn-secondary" id="loginBtn">
+                <i class="fas fa-sign-in-alt"></i>
+                Login
+            </button>
+            <button class="btn btn-primary" id="signupBtn">
+                <i class="fas fa-user-plus"></i>
+                Sign Up
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="animate-on-scroll">Creating Self-Sufficient Villages</h1>
+                <p class="animate-on-scroll">Where every skill finds work, and every need finds service within the community</p>
+                
+                <div class="animate-on-scroll">
+                    <button class="btn btn-primary" style="margin-right: 15px;">
+                        <i class="fas fa-play-circle"></i>
+                        Watch Demo
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-download"></i>
+                        Download App
+                    </button>
+                </div>
+                
+                <div class="hero-stats animate-on-scroll">
+                    <div class="stat">
+                        <span class="stat-number" id="villagesCount">0</span>
+                        <span class="stat-label">Villages Served</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="artisansCount">0</span>
+                        <span class="stat-label">Artisans Registered</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="earningsCount">0</span>
+                        <span class="stat-label">Total Earnings</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Statement -->
+    <section id="vision" class="vision-section">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Our Vision</h2>
+                <p>"Creating self-sufficient villages where every skill finds work, and every need finds service within the community"</p>
+            </div>
+            
+            <div class="vision-content animate-on-scroll">
+                <div class="vision-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Community First</h3>
+                    <p>Building trust through local verification and community-led governance</p>
+                </div>
+                <div class="vision-card">
+                    <i class="fas fa-rupee-sign"></i>
+                    <h3>Economic Growth</h3>
+                    <p>Keeping money circulating within village economies for sustainable development</p>
+                </div>
+                <div class="vision-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Skill Preservation</h3>
+                    <p>Protecting traditional crafts and skills from disappearing due to migration</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Roles Section -->
+    <section id="roles" class="roles-section">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>User Roles & Features</h2>
+                <p>Three-sided marketplace designed for village ecosystems</p>
+            </div>
+            
+            <div class="roles-container">
+                <div class="role-card animate-on-scroll">
+                    <div class="role-icon">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <h3>Service Providers</h3>
+                    <p>Artisans, Craftsmen & Skilled Workers</p>
+                    
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> Digital Profile with Skills</li>
+                        <li><i class="fas fa-check-circle"></i> Portfolio Gallery</li>
+                        <li><i class="fas fa-check-circle"></i> Availability Calendar</li>
+                        <li><i class="fas fa-check-circle"></i> Payment Tracking</li>
+                        <li><i class="fas fa-check-circle"></i> Performance Analytics</li>
+                    </ul>
+                </div>
+                
+                <div class="role-card animate-on-scroll">
+                    <div class="role-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Service Seekers</h3>
+                    <p>Village Residents & Businesses</p>
+                    
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> Category-based Browsing</li>
+                        <li><i class="fas fa-check-circle"></i> Location-based Search</li>
+                        <li><i class="fas fa-check-circle"></i> Job Posting System</li>
+                        <li><i class="fas fa-check-circle"></i> Budget Setting</li>
+                        <li><i class="fas fa-check-circle"></i> Auto-matching</li>
+                    </ul>
+                </div>
+                
+                <div class="role-card animate-on-scroll">
+                    <div class="role-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Village Admin</h3>
+                    <p>Panchayat & Community Leaders</p>
+                    
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> Verification System</li>
+                        <li><i class="fas fa-check-circle"></i> Analytics Dashboard</li>
+                        <li><i class="fas fa-check-circle"></i> Dispute Resolution</li>
+                        <li><i class="fas fa-check-circle"></i> Community Reports</li>
+                        <li><i class="fas fa-check-circle"></i> Skill Gap Analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Features -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Platform Features</h2>
+                <p>Comprehensive tools for village employment management</p>
+            </div>
+            
+            <div class="features-tabs animate-on-scroll">
+                <button class="tab-btn active" data-tab="core">
+                    <i class="fas fa-cogs"></i>
+                    Core Features
+                </button>
+                <button class="tab-btn" data-tab="advanced">
+                    <i class="fas fa-robot"></i>
+                    Advanced Features
+                </button>
+                <button class="tab-btn" data-tab="security">
+                    <i class="fas fa-shield-alt"></i>
+                    Security & Trust
+                </button>
+            </div>
+            
+            <div id="core" class="tab-content active animate-on-scroll">
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4><i class="fas fa-map-marker-alt"></i> Location Services</h4>
+                        <p>Village boundary mapping, intra-village navigation, service area definition with real-time tracking</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i class="fas fa-wallet"></i> Multi-Payment System</h4>
+                        <p>Cash, UPI, digital payments with escrow services and automatic settlement</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i class="fas fa-star"></i> Rating & Review</h4>
+                        <p>5-star rating system with detailed feedback and transparent review management</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i class="fas fa-comments"></i> Communication Tools</h4>
+                        <p>In-app chat, voice calling, photo sharing, and status updates</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="advanced" class="tab-content animate-on-scroll">
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4><i class="fas fa-brain"></i> AI Matching System</h4>
+                        <p>Smart job-provider matching based on skills, location, ratings, and availability</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i class="fas fa-graduation-cap"></i> Learning Hub</h4>
+                        <p>Skill training videos, certification courses, and government scheme information</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i class="fas fa-users"></i> Community Features</h4>
+                        <p>Group projects, skill sharing workshops, and local event management</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i class="fas fa-chart-line"></i> Analytics Dashboard</h4>
+                        <p>Real-time insights on employment trends, earnings, and skill demand</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="security" class="tab-content animate-on-scroll">
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4><i class="fas fa-fingerprint"></i> Identity Verification</h4>
+                        <p>Aadhaar verification, phone verification, and address proof validation</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i class="fas fa-certificate"></i> Work Verification</h4>
+                        <p>Portfolio verification, skill certification, and customer testimonials</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i class="fas fa-lock"></i> Transaction Security</h4>
+                        <p>Escrow payment system, dispute resolution, and insurance for high-value work</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i class="fas fa-user-shield"></i> Community Moderation</h4>
+                        <p>Village admin oversight, transparent rating system, and reporting mechanisms</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Architecture -->
+    <section id="architecture" class="architecture-section">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Platform Architecture</h2>
+                <p>Modern, scalable architecture built for rural empowerment</p>
+            </div>
+            
+            <div class="architecture-diagram animate-on-scroll">
+                <div class="layer">
+                    <h3 class="layer-title">Presentation Layer</h3>
+                    <div class="components">
+                        <div class="component">
+                            <i class="fas fa-mobile-alt"></i>
+                            <p>Mobile App (React Native)</p>
+                        </div>
+                        <div class="component">
+                            <i class="fas fa-desktop"></i>
+                            <p>Web Portal (React.js)</p>
+                        </div>
+                        <div class="component">
+                            <i class="fas fa-chart-bar"></i>
+                            <p>Admin Panel (Next.js)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="layer">
+                    <h3 class="layer-title">Application Layer</h3>
+                    <div class="components">
+                        <div class="component">
+                            <i class="fas fa-server"></i>
+                            <p>API Gateway (Node.js)</p>
+                        </div>
+                        <div class="component">
+                            <i class="fas fa-robot"></i>
+                            <p>AI Services</p>
+                        </div>
+                        <div class="component">
+                            <i class="fas fa-sms"></i>
+                            <p>Notification Service</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="layer">
+                    <h3 class="layer-title">Data Layer</h3>
+                    <div class="components">
+                        <div class="component">
+                            <i class="fas fa-database"></i>
+                            <p>PostgreSQL Database</p>
+                        </div>
+                        <div class="component">
+                            <i class="fas fa-bolt"></i>
+                            <p>Redis Cache</p>
+                        </div>
+                        <div class="component">
+                            <i class="fas fa-archive"></i>
+                            <p>Object Storage</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skill Categories -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Skill Categories</h2>
+                <p>20+ categories, 100+ specific skills for comprehensive coverage</p>
+            </div>
+            
+            <div class="categories-grid">
+                <div class="category-card animate-on-scroll">
+                    <div class="category-header">
+                        <i class="fas fa-home"></i>
+                        <h3>Construction</h3>
+                    </div>
+                    <ul class="skill-list">
+                        <li>Masonry Work</li>
+                        <li>Plumbing</li>
+                        <li>Electrical Work</li>
+                        <li>Painting</li>
+                        <li>Roofing</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card animate-on-scroll">
+                    <div class="category-header">
+                        <i class="fas fa-chair"></i>
+                        <h3>Carpentry</h3>
+                    </div>
+                    <ul class="skill-list">
+                        <li>Furniture Making</li>
+                        <li>Door/Window Repair</li>
+                        <li>Custom Woodwork</li>
+                        <li>Cabinet Making</li>
+                        <li>Wood Carving</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card animate-on-scroll">
+                    <div class="category-header">
+                        <i class="fas fa-tshirt"></i>
+                        <h3>Tailoring</h3>
+                    </div>
+                    <ul class="skill-list">
+                        <li>Stitching</li>
+                        <li>Alterations</li>
+                        <li>Embroidery</li>
+                        <li>Traditional Wear</li>
+                        <li>Custom Design</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card animate-on-scroll">
+                    <div class="category-header">
+                        <i class="fas fa-utensils"></i>
+                        <h3>Food Services</h3>
+                    </div>
+                    <ul class="skill-list">
+                        <li>Cooking</li>
+                        <li>Catering</li>
+                        <li>Tiffin Service</li>
+                        <li>Baking</li>
+                        <li>Traditional Recipes</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card animate-on-scroll">
+                    <div class="category-header">
+                        <i class="fas fa-tractor"></i>
+                        <h3>Farming</h3>
+                    </div>
+                    <ul class="skill-list">
+                        <li>Organic Farming</li>
+                        <li>Irrigation</li>
+                        <li>Harvesting</li>
+                        <li>Soil Testing</li>
+                        <li>Crop Protection</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card animate-on-scroll">
+                    <div class="category-header">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Electronics</h3>
+                    </div>
+                    <ul class="skill-list">
+                        <li>Mobile Repair</li>
+                        <li>Appliance Fixing</li>
+                        <li>TV Repair</li>
+                        <li>Wiring</li>
+                        <li>Solar Installation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section id="roadmap" class="roadmap-section">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Implementation Roadmap</h2>
+                <p>Phased rollout strategy for sustainable growth</p>
+            </div>
+            
+            <div class="timeline animate-on-scroll">
+                <div class="timeline-item">
+                    <div class="phase-card">
+                        <div class="phase-title">
+                            <i class="fas fa-rocket"></i>
+                            <h3>Phase 1: Pilot Launch</h3>
+                        </div>
+                        <p><strong>Months 1-3</strong></p>
+                        <ul>
+                            <li>Select 2-3 pilot villages</li>
+                            <li>Basic web platform</li>
+                            <li>Core features only</li>
+                            <li>On-ground awareness campaigns</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="phase-card">
+                        <div class="phase-title">
+                            <i class="fas fa-expand"></i>
+                            <h3>Phase 2: Expansion</h3>
+                        </div>
+                        <p><strong>Months 4-6</strong></p>
+                        <ul>
+                            <li>Add 10-15 more villages</li>
+                            <li>Mobile app development</li>
+                            <li>Payment integration</li>
+                            <li>Rating system implementation</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="phase-card">
+                        <div class="phase-title">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Phase 3: Growth</h3>
+                        </div>
+                        <p><strong>Months 7-12</strong></p>
+                        <ul>
+                            <li>Expand to 50+ villages</li>
+                            <li>AI matching algorithms</li>
+                            <li>Learning hub launch</li>
+                            <li>Multi-language support</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="phase-card">
+                        <div class="phase-title">
+                            <i class="fas fa-globe"></i>
+                            <h3>Phase 4: Scale</h3>
+                        </div>
+                        <p><strong>Year 2+</strong></p>
+                        <ul>
+                            <li>1000+ villages coverage</li>
+                            <li>Certification programs</li>
+                            <li>Advanced analytics</li>
+                            <li>Government partnerships</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-container">
+                <div class="dashboard-preview animate-on-scroll">
+                    <h3 style="margin-bottom: 20px;">Village Admin Dashboard</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">156</div>
+                            <div>Active Jobs</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">₹2.5L</div>
+                            <div>Monthly Earnings</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">89%</div>
+                            <div>Job Completion</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">4.8</div>
+                            <div>Avg Rating</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-info animate-on-scroll">
+                    <h2>Real-time Monitoring</h2>
+                    <p>Comprehensive dashboard for village administrators to track:</p>
+                    <ul style="margin-top: 20px;">
+                        <li>Active transactions and employment generated</li>
+                        <li>Top skills in demand</li>
+                        <li>Earnings analytics and trends</li>
+                        <li>Community impact reports</li>
+                        <li>Skill gap analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section class="tech-section">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Technology Stack</h2>
+                <p>Modern technologies for rural empowerment</p>
+            </div>
+            
+            <div class="tech-stack animate-on-scroll">
+                <div class="tech-item">
+                    <i class="fab fa-react"></i>
+                    <p>React Native</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-node-js"></i>
+                    <p>Node.js</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-database"></i>
+                    <p>PostgreSQL</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-aws"></i>
+                    <p>AWS Cloud</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <p>Google Maps API</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-sms"></i>
+                    <p>Twilio SMS</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>GraminRozgar</h3>
+                    <p>Creating self-sufficient villages through digital empowerment and local employment.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#vision">Vision</a></li>
+                        <li><a href="#roles">User Roles</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#skills">Skill Categories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Research Papers</a></li>
+                        <li><a href="#">Government Schemes</a></li>
+                        <li><a href="#">Training Materials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> GraminRozgar HQ, New Delhi</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +91 1800-123-4567</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> support@graminrozgar.com</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Mon-Sat: 9AM-6PM</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 GraminRozgar. All rights reserved. | Made with <i class="fas fa-heart" style="color: #FF6B35;"></i> for Rural India</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2 style="margin-bottom: 30px;">Login to GraminRozgar</h2>
+            
+            <div style="margin-bottom: 20px;">
+                <button class="btn btn-primary" style="width: 100%; margin-bottom: 10px;">
+                    <i class="fas fa-user-tie"></i>
+                    Login as Artisan
+                </button>
+                <button class="btn btn-secondary" style="width: 100%; margin-bottom: 10px;">
+                    <i class="fas fa-home"></i>
+                    Login as Service Seeker
+                </button>
+                <button class="btn" style="width: 100%; background: #f8f9fa;">
+                    <i class="fas fa-user-shield"></i>
+                    Login as Village Admin
+                </button>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <p>New to GraminRozgar? <a href="#" style="color: var(--primary);">Create an account</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2 style="margin-bottom: 30px;">Join GraminRozgar</h2>
+            
+            <div style="display: grid; gap: 15px;">
+                <input type="text" placeholder="Full Name" style="padding: 12px; border: 1px solid #ddd; border-radius: 5px;">
+                <input type="email" placeholder="Email Address" style="padding: 12px; border: 1px solid #ddd; border-radius: 5px;">
+                <input type="tel" placeholder="Phone Number" style="padding: 12px; border: 1px solid #ddd; border-radius: 5px;">
+                
+                <select style="padding: 12px; border: 1px solid #ddd; border-radius: 5px;">
+                    <option>Select User Type</option>
+                    <option>Artisan / Service Provider</option>
+                    <option>Service Seeker</option>
+                    <option>Village Administrator</option>
+                </select>
+                
+                <select style="padding: 12px; border: 1px solid #ddd; border-radius: 5px;">
+                    <option>Select Village</option>
+                    <option>Suhagi Village, Madhya Pradesh</option>
+                    <option>Rampur Village, Uttar Pradesh</option>
+                    <option>Devli Village, Rajasthan</option>
+                    <option>Add new village...</option>
+                </select>
+                
+                <button class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+                    Create Account
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize counters
+        let villagesCount = 0;
+        let artisansCount = 0;
+        let earningsCount = 0;
+        
+        const villagesTarget = 500;
+        const artisansTarget = 10000;
+        const earningsTarget = 250000000; // 25 Crores
+        
+        // Counter animation
+        function animateCounter(element, target, prefix = '', suffix = '') {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = prefix + target.toLocaleString() + suffix;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = prefix + Math.floor(current).toLocaleString() + suffix;
+                }
+            }, 20);
+        }
+        
+        // Scroll animation
+        function checkScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                    
+                    // Start counter animation for hero stats
+                    if (element.id === 'home' || element.classList.contains('hero-stats')) {
+                        const villagesElement = document.getElementById('villagesCount');
+                        const artisansElement = document.getElementById('artisansCount');
+                        const earningsElement = document.getElementById('earningsCount');
+                        
+                        if (villagesElement && villagesCount === 0) {
+                            animateCounter(villagesElement, villagesTarget);
+                            animateCounter(artisansElement, artisansTarget);
+                            animateCounter(earningsElement, earningsTarget, '₹');
+                            villagesCount = villagesTarget;
+                            artisansCount = artisansTarget;
+                            earningsCount = earningsTarget;
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Tab switching
+        function setupTabs() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = btn.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        }
+        
+        // Modal functionality
+        function setupModals() {
+            const loginBtn = document.getElementById('loginBtn');
+            const signupBtn = document.getElementById('signupBtn');
+            const loginModal = document.getElementById('loginModal');
+            const signupModal = document.getElementById('signupModal');
+            const closeButtons = document.querySelectorAll('.close-modal');
+            
+            // Open login modal
+            loginBtn.addEventListener('click', () => {
+                loginModal.style.display = 'flex';
+            });
+            
+            // Open signup modal
+            signupBtn.addEventListener('click', () => {
+                signupModal.style.display = 'flex';
+            });
+            
+            // Close modals
+            closeButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    loginModal.style.display = 'none';
+                    signupModal.style.display = 'none';
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+                if (e.target === signupModal) {
+                    signupModal.style.display = 'none';
+                }
+            });
+        }
+        
+        // Smooth scrolling for navigation links
+        function setupSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            setupTabs();
+            setupModals();
+            setupSmoothScroll();
+            checkScroll();
+            
+            window.addEventListener('scroll', checkScroll);
+            
+            // Add some sample data for demonstration
+            const sampleSkills = [
+                { category: 'Construction', skills: ['Masonry', 'Plumbing', 'Electrical', 'Painting'] },
+                { category: 'Carpentry', skills: ['Furniture', 'Repair', 'Custom Work'] },
+                { category: 'Tailoring', skills: ['Stitching', 'Alterations', 'Embroidery'] },
+                { category: 'Food Services', skills: ['Cooking', 'Catering', 'Tiffin Service'] }
+            ];
+            
+            // You can add more interactive features here
+            console.log('GraminRozgar Platform initialized successfully!');
+        });
+        
+        // Additional features for demonstration
+        function simulateJobPosting() {
+            const jobData = {
+                title: "Need Carpenter for Furniture Repair",
+                category: "Carpentry",
+                budget: "₹1500-₹2000",
+                location: "Suhagi Village",
+                timeline: "2 days",
+                status: "Looking for artisans..."
+            };
+            
+            alert(`New job posted:\n\nTitle: ${jobData.title}\nCategory: ${jobData.category}\nBudget: ${jobData.budget}\nLocation: ${jobData.location}`);
+            
+            // Simulate AI matching
+            setTimeout(() => {
+                alert("AI Matching: Found 3 suitable artisans nearby!\n1. Ramesh Carpenter (0.5km away)\n2. Suresh Furniture Expert (1.2km away)\n3. Mohan Woodworker (0.8km away)");
+            }, 1000);
+        }
+        
+        // Expose some functions for demo purposes
+        window.simulateJobPosting = simulateJobPosting;
+        window.graminRozgar = {
+            postJob: simulateJobPosting,
+            stats: {
+                villages: 500,
+                artisans: 10000,
+                earnings: "₹25Cr+"
+            }
+        };
+    </script>
+</body>
+</html>
